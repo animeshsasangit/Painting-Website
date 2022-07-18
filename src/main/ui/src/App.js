@@ -7,6 +7,10 @@ import { DisplayBoard } from './components/DisplayBoard'
 import CreateUser from './components/CreateUser'
 import { getAllUsers, createUser } from './services/UserService'
 
+
+function isEmpty(str){
+  return (!str || str.length === 0)
+}
 class App extends Component {
 
   state = {
@@ -16,6 +20,21 @@ class App extends Component {
   }
 
   createUser = (e) => {
+      let user = this.state.user
+      if(!isEmpty(document.getElementById("firstname").value)){
+        user.firstName = document.getElementById("firstname").value;
+      }
+      if(!isEmpty(document.getElementById("lastname").value)){
+        user.lastName = document.getElementById("lastname").value;
+      }
+      if(!isEmpty(document.getElementById("email").value)){
+        user.email = document.getElementById("email").value;
+      }
+      this.setState({user: user})
+      if(isEmpty(user.firstName) || isEmpty(user.lastName) || isEmpty(user.email)){
+        alert("Please enter all values!!" + user.firstName + user.lastName + user.email);
+        return;
+      }
       createUser(this.state.user)
         .then(response => {
           console.log(response);
@@ -33,16 +52,19 @@ class App extends Component {
   }
 
   onChangeForm = (e) => {
-      let user = this.state.user
-      // user.id = this.state.numberOfUsers + 1
-      if (e.target.name === 'firstname') {
-          user.firstName = e.target.value;
-      } else if (e.target.name === 'lastname') {
-          user.lastName = e.target.value;
-      } else if (e.target.name === 'email') {
-          user.email = e.target.value;
-      }
-      this.setState({user})
+      // let user = this.state.user
+      // // user.id = this.state.numberOfUsers + 1
+      // if(document.getElementById("firstname")){
+      //   user.firstName = document.getElementById("firstname");
+      // }
+      // if(document.getElementById("lastname")){
+      //   user.lastName = document.getElementById("lastname");
+      // }
+      // if(document.getElementById("email")){
+      //   user.email = document.getElementById("email");
+      // }
+      
+      // this.setState({user})
   }
   
   render() {

@@ -25,14 +25,19 @@ public class Users {
     private String lastName;
     
     @Column
-    @NotNull(message="{NotNull.User.email}")
+    // @NotNull(message="{NotNull.User.email}")
     private String email;
     
-    // public Users(String firstName, String lastName, String email) {
-    //     this.firstName = firstName;
-    //     this.lastName = lastName;
-    //     this.email = email;
-    // }
+    public Users(){
+        this.firstName = "";
+        this.lastName = "";
+        this.email = "";
+    }
+    public Users(String firstName, String lastName, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
 
     public long getId() {
         return id;
