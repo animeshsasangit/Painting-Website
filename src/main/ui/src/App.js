@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { Header } from './components/Header'
 import { Users } from './components/Users'
 import { DisplayBoard } from './components/DisplayBoard'
 import CreateUser from './components/CreateUser'
@@ -46,32 +45,26 @@ class App extends Component {
   getAllUsers = () => {
     getAllUsers()
       .then(users => {
-        console.log(users)
         this.setState({users: users, numberOfUsers: users.length})
       });
   }
 
   onChangeForm = (e) => {
-      // let user = this.state.user
-      // // user.id = this.state.numberOfUsers + 1
-      // if(document.getElementById("firstname")){
-      //   user.firstName = document.getElementById("firstname");
-      // }
-      // if(document.getElementById("lastname")){
-      //   user.lastName = document.getElementById("lastname");
-      // }
-      // if(document.getElementById("email")){
-      //   user.email = document.getElementById("email");
-      // }
       
-      // this.setState({user})
+  }
+
+    componentDidMount() {
+      window.addEventListener('load', this.getAllUsers);
+  }
+
+  componentWillUnmount() { 
+    window.removeEventListener('load', this.handleLoad)  
   }
   
   render() {
-    getAllUsers();
+    // this.getAllUsers();
     return (
       <div className="App">
-        <Header></Header>
         <div className="container mrgnbtm">
           <div className="row">
             <div className="col-md-8">
